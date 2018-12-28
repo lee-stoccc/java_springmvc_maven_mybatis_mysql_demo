@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liaoze.stockmgt.dao.HotelDao">
+<!--设置domain类和数据库中表的字段一一对应，注意数据库字段和domain类中的字段名称不致，此处一定要！-->
+    <resultMap id="BaseResultMap" type="com.liaoze.stockmgt.model.Hotel">
+        <id column="HotelID" property="HotelID" jdbcType="INTEGER" />
+        <result column="HotelCode" property="HotelCode" jdbcType="CHAR" />
+        <result column="HotelName" property="HotelName" jdbcType="CHAR" />
+        <result column="HotelAdd" property="HotelAdd" jdbcType="CHAR" />
+        <result column="HotelTel" property="HotelTel" jdbcType="CHAR" />
+        <result column="LegalPerson" property="LegalPerson" jdbcType="CHAR" />
+        <result column="Latitude" property="Latitude" jdbcType="CHAR" />
+        <result column="Longitude" property="Longitude" jdbcType="CHAR" />
+        <result column="ProvinceID" property="ProvinceID" jdbcType="INTEGER" />
+        <result column="CityID" property="CityID" jdbcType="INTEGER" />
+        <result column="DistrictID" property="DistrictID" jdbcType="INTEGER" />
+        <result column="State" property="State" jdbcType="INTEGER" />
+        <result column="HotelType" property="HotelType" jdbcType="INTEGER" />
+        <result column="Remark" property="Remark" jdbcType="CHAR" />
+        <result column="Mobile" property="Mobile" jdbcType="CHAR" />
+        <result column="ContactPeople" property="ContactPeople" jdbcType="CHAR" />
+        <result column="Level" property="Level" jdbcType="INTEGER" />
+        <result column="CreateTime2" property="CreateTime2" jdbcType="DATE" />
+        <result column="AuditTime" property="AuditTime" jdbcType="DATE" />
+        <result column="AuditUserCode" property="AuditUserCode" jdbcType="CHAR" />
+        <result column="RoomsCount" property="RoomsCount" jdbcType="INTEGER" />
+        <result column="BedsCount" property="BedsCount" jdbcType="INTEGER" />
+        <result column="AuditStatus" property="AuditStatus" jdbcType="INTEGER" />
+        <result column="BusinessLicenseID" property="BusinessLicenseID" jdbcType="INTEGER" />
+        <result column="BusinessLicenseName" property="BusinessLicenseName" jdbcType="CHAR" />
+        <result column="CreateTime" property="CreateTime" jdbcType="DATE" />
+    </resultMap>
+    <!-- 查询单条记录 -->
+    <select id="searchHotel" parameterType="com.liaoze.stockmgt.model.Hotel" resultMap="BaseResultMap">
+        SELECT * FROM h_hotel WHERE HotelID = #{HotelID}
+    </select>
+    
+    <!-- 根据账号名登录 -->
+    <select id="selectUserByUserName" parameterType="String" resultMap="BaseResultMap">
+        SELECT * FROM user WHERE name = #{userName}
+    </select>
+    
+     <!-- 根据账号名登录 -->
+  <!--   <insert id="register"  parameterType="com.liaoze.stockmgt.model.User">
+        INSERT INTO user (name,password) VALUES (#{userName},#{userPassword})
+    </insert> -->
+    
+      <insert id="register"  parameterType="map">
+        INSERT INTO user (name,password) VALUES (#{userName},#{userPassword})
+    </insert>
+    
+    <delete id="delUser" parameterType="String">
+    	delete from user where name = #{userName}
+    </delete>
+    
+</mapper>
